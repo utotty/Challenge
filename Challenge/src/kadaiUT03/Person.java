@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Person {
 	private String lastName;
@@ -49,6 +50,10 @@ public class Person {
 	}
 
 	// 生年月日
+	public String getBirthday() {
+		return birthday;
+	}
+
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 
@@ -66,7 +71,7 @@ public class Person {
 		}
 
 		// 生年月日のインスタンス取得
-		Calendar birthdayCal = Calendar.getInstance();
+		GregorianCalendar birthdayCal = new GregorianCalendar();
 		birthdayCal.setTime(date);
 		// 計算日のインスタンス取得
 		Calendar toDayCal = Calendar.getInstance();
@@ -75,10 +80,21 @@ public class Person {
 		int age = toDayCal.get(Calendar.YEAR) - birthdayCal.get(Calendar.YEAR);
 		// ただし誕生月・日より年齢計算月日が前であれば年齢は1歳少ない
 		// 仕様上マイナス年齢になることがある
+		if (!birthdayCal.isLeapYear(toDayCal.get(Calendar.YEAR))) {
+			// 誕生日が閏ではない場合
+			if (birthdayCal.get(Calendar.DAY_OF_MONTH) == 2
+					&& birthdayCal.get(Calendar.DATE) >= 29) {
+				// 誕生日を3/1にする
+				birthdayCal.set(Calendar.DAY_OF_MONTH, 3);
+				birthdayCal.set(Calendar.DATE, 1);
+			}
+		}
 		if (toDayCal.get(Calendar.MONTH) < birthdayCal.get(Calendar.MONTH)) {
 			age--;
-		} else if (toDayCal.get(Calendar.DAY_OF_MONTH) < birthdayCal
-				.get(Calendar.DAY_OF_MONTH)) {
+		} else if (toDayCal.get(Calendar.MONTH) == birthdayCal
+				.get(Calendar.MONTH)
+				&& toDayCal.get(Calendar.DAY_OF_MONTH) < birthdayCal
+						.get(Calendar.DAY_OF_MONTH)) {
 			age--;
 		}
 		return age;
