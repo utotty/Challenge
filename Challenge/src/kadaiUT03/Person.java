@@ -49,16 +49,12 @@ public class Person {
 	}
 
 	// 生年月日
-	public String getbirthday() {
-		return birthday;
-	}
-
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 
 	}
 
-	public int getAgeFromBirthday(String birthday) {
+	private int getAgeFromBirthday(String birthday) {
 
 		// String型のbirthdayをDate型に変換
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -86,10 +82,6 @@ public class Person {
 			age--;
 		}
 		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public int getAge() {

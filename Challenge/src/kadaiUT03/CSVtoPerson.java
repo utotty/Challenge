@@ -12,8 +12,8 @@ public class CSVtoPerson {
 			throws ParseException {
 
 		// 変数定義
-		String lastName = null, firstName = null, address = null;
-		String birthday = null;
+		String lastName = "", firstName = "", address = "";
+		String birthday = "";
 		int age = 0;
 
 		// 格納用のオブジェクト生成
@@ -40,6 +40,9 @@ public class CSVtoPerson {
 				person.setBirthday(col[3]);
 				personList.add(person);
 
+			}
+			if (personList.isEmpty()) {
+				System.out.println("中身がありません。");
 			}
 		} catch (IOException e) {
 

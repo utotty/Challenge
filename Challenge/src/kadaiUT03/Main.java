@@ -33,6 +33,8 @@ public class Main {
 			for (Person person : personList) {
 				System.out.println(person.toString());
 			}
+		} else {
+			System.out.println("ファイルが存在しません。");
 		}
 	}
 }
